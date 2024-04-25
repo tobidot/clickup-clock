@@ -1,9 +1,82 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #333;
-    background-color: #fff;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+}
+
+#time-trackings-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  .separator {
+    text-align: center;
+    font-weight: bold;
+    background-color: #ccc; // Adjust color for separators
+    > td {
+      padding: 0;
+      text-align: center;
+    }
+  }
+
+  /** Change color and font size for different duration types */
+  .separator {
+    background-color: var(--bg);
+    font-size: var(--size);
+    color: black;
+
+    &.negative {
+      --bg: #bb0600;
+      --size: 1.5rem;
+    }
+
+    &.short {
+      --bg: #458097;
+      --size: 0.5rem;
+    }
+
+    &.medium {
+      --bg: #927700;
+      --size: 1rem;
+    }
+
+    &.long {
+      --bg: #bb0600;
+      --size: 1.5rem;
+    }
+  }
+
+  tbody tr.separator:hover {
+    filter: brightness(1.55);
+  }
+}
+
+.selected {
+  animation: highlight 2s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes highlight {
+  from {
+    stroke: #888800;
+    background: #ffff88;
+  }
+  to {
+    stroke: #ffff00;
+    background: #ffff00;
+  }
 }

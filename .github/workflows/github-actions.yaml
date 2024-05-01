@@ -43,12 +43,18 @@ jobs:
       - name: Zip dist folder
         run: zip -r dist.zip dist
       - name: Debug
-        run: ls -la ; echo "${{ vars.HOST }}" ;
+        run: ls -la ; echo "$HOST_VAR" ; echo "$API_TOKEN_VAR" ;
+        env:
+          HOST_VAR: ${{ vars.REPOSITORY_VAR }}
+          API_TOKEN_VAR: ${{ secrets.API_TOKEN }}
       - name: Create Release
         run: |
-          curl -X POST --location "${{vars.HOST}}/api/v1/projects/1/releases" \
-            -H "Authorization: Bearer ${{secrets.API_TOKEN}}" \
+          curl -X POST --location "$HOST_VAR/api/v1/projects/1/releases" \
+            -H "Authorization: Bearer $API_TOKEN_VAR" \
             -H "Accept: application/json" \
             -H "Content-Disposition: form-data; name="file"; filename="dist.zip"" \
             -H "Content-Type: multipart/form-data; boundary=WebAppBoundary" \
             -F "zip=@dist.zip;filename=dist.zip;type=application/zip"
+        env:
+          HOST_VAR: ${{ vars.REPOSITORY_VAR }}
+          API_TOKEN_VAR: ${{ secrets.API_TOKEN }}

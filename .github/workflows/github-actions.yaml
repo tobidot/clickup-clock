@@ -42,9 +42,11 @@ jobs:
         run: yarn build
       - name: Zip dist folder
         run: zip -r dist.zip dist
+      - name: Debug
+        run: ls -la ; echo "${{ vars.HOST }}" ;
       - name: Create Release
         run: |
-          curl -X POST --location "${{env.HOST}}/api/v1/projects/1/releases" \
+          curl -X POST --location "${{vars.HOST}}/api/v1/projects/1/releases" \
             -H "Authorization: Bearer ${{secrets.API_TOKEN}}" \
             -H "Accept: application/json" \
             -H "Content-Disposition: form-data; name="file"; filename="dist.zip"" \

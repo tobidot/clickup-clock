@@ -6,6 +6,7 @@ on:
       - master
 env:
   HOST: "https://www.game-object.de/"
+  PROJECT_ID: 13
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,13 +22,16 @@ jobs:
       - name: Build
         run: yarn build
       - name: Zip dist folder
-        run: zip -r dist.zip dist
+        run: |
+          cd dist
+          zip -r dist.zip dist/*
+          cd ..
       - name: Create Release
         run: |
-          STATUS_CODE=$(curl -X POST --location "$HOST/api/v1/projects/1/releases" \
+          STATUS_CODE=$(curl -X POST --location "$HOST/api/v1/projects/$PROJECT_ID/releases" \
             -H "Authorization: Bearer $API_TOKEN_VAR" \
             -H "Accept: application/json" \
-            -F "zip=@dist.zip;filename=dist.zip;type=application/zip" \
+            -F "zip=@./dist.zip;filename=dist.zip;type=application/zip" \
             --silent --output /dev/stderr --write-out "%{http_code}")
           if [ $STATUS_CODE -ne 200 ]; then exit 1; fi
         env:

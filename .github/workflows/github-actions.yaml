@@ -24,11 +24,13 @@ jobs:
         run: zip -r dist.zip dist
       - name: Create Release
         run: |
-          curl -X POST --location "$HOST/api/v1/projects/1/releases" \
+          STATUS_CODE=$(curl -X POST --location "$HOST/api/v1/projects/1/releases" \
             -H "Authorization: Bearer $API_TOKEN_VAR" \
             -H "Accept: application/json" \
             -H "Content-Disposition: form-data; name="file"; filename="dist.zip"" \
             -H "Content-Type: multipart/form-data; boundary=WebAppBoundary" \
-            -F "zip=@dist.zip;filename=dist.zip;type=application/zip"
+            -F "zip=@dist.zip;filename=dist.zip;type=application/zip") \
+            --silent --output /dev/stderr --write-out "%{http_code}"
+          if [ $STATUS_CODE -ne 200 ]; then exit 1; fi
         env:
           API_TOKEN_VAR: ${{ secrets.API_TOKEN }}

@@ -117,13 +117,17 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.19.12.tgz#c57c8afbb4054a3ab8317591a0b7320360b444ae"
   integrity sha512-T1QyPSDCyMXaO3pzBkF96E8xMkiRYbUEZADd29SyPGabqxMViNoii+NcK7eWJAEoU6RZyEm5lVSIjTmcdoB9HA==
 
-"@game.object/ts-class-entities@file:../../../../libs/my/typescript/ts-class-entities":
+"@game.object/ts-class-entities@0.0.5":
   version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@game.object/ts-class-entities/-/ts-class-entities-0.0.5.tgz#8855b9163ab8cdda0506ad95bf93c7ac40bc94d5"
+  integrity sha512-H5Twx9o4SXbW6bduz5ASqStzKQv0fPgvY+sUkUEZ+scu++yJG7s9VapMFUINghZXwRI96pTIalnVXtkfy9vj1A==
   dependencies:
-    "@game.object/ts-game-toolbox" "file:C:/Users/Objec/AppData/Local/Yarn/Cache/v6/npm-@game-object-ts-class-entities-0.0.5-dcb36e13-17dc-4dff-ba75-c1ccbcba1e9c-1708719795035/node_modules/@game.object/ts-game-toolbox"
+    "@game.object/ts-game-toolbox" "^4.1.5"
 
-"@game.object/ts-game-toolbox@file:../../../../libs/my/typescript/ts-game-toolbox":
+"@game.object/ts-game-toolbox@4.1.6", "@game.object/ts-game-toolbox@^4.1.5":
   version "4.1.6"
+  resolved "https://registry.yarnpkg.com/@game.object/ts-game-toolbox/-/ts-game-toolbox-4.1.6.tgz#41937cc4a3132fb1e611631eac9a1efef3e2102c"
+  integrity sha512-K0SQWkpEnJddwJqr2DUlAWaDsrXFG3fa9ZQ9CVQRfCLr7mGw3tdA3rNfzR1CLeBHj50pmh/Z+iwNO90cpgbjJA==
   dependencies:
     "@types/assert" "^1.5.6"
     "@types/chai" "^4.3.11"

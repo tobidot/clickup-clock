@@ -22,10 +22,6 @@ jobs:
         run: yarn build
       - name: Zip dist folder
         run: zip -r dist.zip dist
-      - name: Debug 1
-        run: |
-          echo "$HOST" 
-          env
       - name: Create Release
         run: |
           curl -X POST --location "$HOST/api/v1/projects/1/releases" \

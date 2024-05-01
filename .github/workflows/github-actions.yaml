@@ -43,9 +43,10 @@ jobs:
       - name: Zip dist folder
         run: zip -r dist.zip dist
       - name: Create Release
-        run: curl -X POST --location "${{host}}/api/v1/projects/1/releases" \
-          -H "Authorization: Bearer ${{api_token}}" \
-          -H "Accept: application/json" \
-          -H "Content-Disposition: form-data; name="file"; filename="dist.zip"" \
-          -H "Content-Type: multipart/form-data; boundary=WebAppBoundary" \
-          -F "zip=@dist.zip;filename=dist.zip;type=application/zip"
+        run: |
+          curl -X POST --location "${{host}}/api/v1/projects/1/releases" \
+            -H "Authorization: Bearer ${{api_token}}" \
+            -H "Accept: application/json" \
+            -H "Content-Disposition: form-data; name="file"; filename="dist.zip"" \
+            -H "Content-Type: multipart/form-data; boundary=WebAppBoundary" \
+            -F "zip=@dist.zip;filename=dist.zip;type=application/zip"

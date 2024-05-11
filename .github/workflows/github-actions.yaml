@@ -24,14 +24,14 @@ jobs:
       - name: Zip dist folder
         run: |
           cd dist
-          zip -r dist.zip dist/*
+          zip -r dist.zip ./*
           cd ..
       - name: Create Release
         run: |
           STATUS_CODE=$(curl -X POST --location "$HOST/api/v1/projects/$PROJECT_ID/releases" \
             -H "Authorization: Bearer $API_TOKEN_VAR" \
             -H "Accept: application/json" \
-            -F "zip=@./dist.zip;filename=dist.zip;type=application/zip" \
+            -F "zip=@./dist/dist.zip;filename=dist.zip;type=application/zip" \
             --silent --output /dev/stderr --write-out "%{http_code}")
           if [ $STATUS_CODE -ne 200 ]; then exit 1; fi
         env:

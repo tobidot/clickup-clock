@@ -1,12 +1,14 @@
 html,
 body {
   margin: 0;
-  padding: 0;
+  padding: 0 1rem;
   font-family: "Roboto", sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5;
-  color: #333;
-  background-color: #fff;
+  letter-spacing: .025rem;
+  color: rgb(240, 241, 243);
+  background-color: rgb(42, 46, 52);
+  font-family: 'Courier New', monospace;
 }
 
 #time-trackings-table {
@@ -15,30 +17,62 @@ body {
 
   th,
   td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border: 1px solid rgb(60, 65, 74);
     text-align: left;
+    font-family: Arial, sans-serif;
+    padding: 1rem;
+  }
+
+  .separator td {
+    border: none;
+    cursor: pointer;
   }
 
   th {
-    background-color: #f2f2f2;
+    background-color: rgb(48, 53, 60);
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 10px;
+  }
+
+  a {
+    color: rgb(240, 241, 243);
+    text-decoration: none;
+    padding-bottom: 5px;
   }
 
   .separator {
+    position: relative;
     text-align: center;
     font-weight: bold;
-    background-color: #ccc; // Adjust color for separators
+    background-color: rgb(60, 65, 74); // Adjust color for separators
     > td {
       padding: 0;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      min-width: 20px;
+      max-width: 40px;
+      border-radius: 50px;
+      height: 20px;
+      margin-top: -10px;
+      display: flex;
+      align-items: center;
       text-align: center;
+      place-content: center;
     }
   }
 
   /** Change color and font size for different duration types */
   .separator {
-    background-color: var(--bg);
     font-size: var(--size);
     color: black;
+
+    > td {
+      background-color: var(--bg);
+    }
 
     &.negative {
       --bg: #bb0600;
@@ -46,17 +80,17 @@ body {
     }
 
     &.short {
-      --bg: #458097;
+      --bg: #0aa;
       --size: 0.5rem;
     }
 
     &.medium {
-      --bg: #927700;
+      --bg: #aa0;
       --size: 1rem;
     }
 
     &.long {
-      --bg: #bb0600;
+      --bg: #a00;
       --size: 1.5rem;
     }
   }
@@ -67,16 +101,47 @@ body {
 }
 
 .selected {
-  animation: highlight 2s ease-in-out infinite alternate-reverse;
+  animation: highlight 2s ease-in-out forwards alternate-reverse;
 }
 
 @keyframes highlight {
   from {
-    stroke: #888800;
-    background: #ffff88;
+    stroke: #aaa;
+    background: rgb(48, 53, 60);
   }
   to {
-    stroke: #ffff00;
-    background: #ffff00;
+    stroke: rgb(42, 46, 52);
+    background: rgb(60, 65, 74);
+  }
+}
+
+#wrapper {
+  padding: 1rem;
+  font-size: 1rem;
+
+  input, button {
+    color: #0f0;
+    background-color: rgb(42, 46, 52);
+    border: none;
+    padding: .25rem 1rem;
+    min-height: 20px;
+    font-family: 'Courier New', monospace;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(48, 53, 60);
+    }
+  }
+  label {
+    line-height: 3rem;
+  }
+  button {
+    border: 3px solid rgb(48, 53, 60);
+    background-color: #222;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(60, 65, 74);
+    }
   }
 }

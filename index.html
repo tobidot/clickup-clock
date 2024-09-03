@@ -6,26 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clickup Clock</title>
     <link rel="stylesheet" href="/src/index.scss" />
-    <script async src="/src/index.ts" type="module"></script>
+    <script defer src="/src/index.ts" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
   </head>
 
-  <body>
-    <h1>Clickup Clock</h1>
+  <body id="wrapper">
     <label>
       Token:
-      <input id="token" placeholder="pk_XXXXXXXX_..." />
+        <input id="token"  value="" style="width:400px" />
     </label>
     <label>
-      <button id="refresh" type="button">Refresh</button>
+        Day:
+        <input type="date" id="newDate" />
+    </label>
+    <label>
+        <button id="refresh" type="button" value="">Refresh</button>
     </label>
     <div id="app"></div>
-
-    <h2>Time Trackings for the Day</h2>
 
     <table id="time-trackings-table">
       <thead>
         <tr>
+          <th style="width:0;">&nbsp;</th>
           <th>Task Name</th>
           <th>Track Description</th>
           <th>Start Time</th>
@@ -37,6 +39,10 @@
         <!-- Table body will be populated dynamically with JavaScript -->
       </tbody>
     </table>
-    <svg id="chart"></svg>
+    <svg id="chart" style="display:none"></svg>
+    <script>
+        const today = new Date();
+        document.getElementById('newDate').value = today.toISOString().split('T')[0];
+    </script>
   </body>
 </html>

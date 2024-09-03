@@ -155,14 +155,14 @@ export class App {
         if (row_data.type === 'task_separator') {
             const row = document.createElement('tr');
             const classification = (() => {
-                if (Math.abs(row_data.separator.time) < 1000 * 30) {
+                if (Math.abs(row_data.separator.time) < 1000 * 15) {
                     // less than a minute
                     return 'short';
                 }
                 if (row_data.separator.time < 0) {
                     return 'negative';
                 }
-                if (row_data.separator.time < 1000 * 60 * 30) {
+                if (row_data.separator.time < 1000 * 60 * 15) {
                     // less than half an hour
                     return 'medium';
                 }
@@ -171,7 +171,7 @@ export class App {
             })();
             row.className = [classification, 'separator'].join(' ');
             // in minutes
-            const content = Math.round(row_data.separator.time / 1000 / 60).toFixed(0) + ' minutes';
+            const content = Math.round(row_data.separator.time / 1000 / 60).toFixed(0);
             row.innerHTML = `
 <td colspan="5" >${content}</td>
             `
@@ -180,6 +180,7 @@ export class App {
         const start = new Date(Number.parseInt(row_data.tracking.start)).toLocaleTimeString();
         const end = new Date(Number.parseInt(row_data.tracking.end)).toLocaleTimeString();
         const duration_in_hours = (Number.parseInt(row_data.tracking.duration) / 3600 / 1000).toFixed(2) + 'h';
+        const id = row_data.tracking.task.id;
         const name = row_data.tracking.task.name;
         // const name = "title";
         const description = row_data.tracking.description;
@@ -191,6 +192,7 @@ export class App {
         row.classList.add('tracking');
         row.dataset.trackingId = row_data.tracking.id;
         row.innerHTML = `
+<td><a href="https://app.clickup.com/t/${id}" target="_blank"><img src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDE2IDE2IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiPgoJPHRpdGxlPndpbmRvdy1uZXctc3ZnPC90aXRsZT4KCTxzdHlsZT4KCQkuczAgeyBmaWxsOiAjNjU2ZjdkIH0gCgk8L3N0eWxlPgoJPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGFzcz0iczAiIGQ9Im00LjEgMy43YzAuNC0xIDEuMy0xLjcgMi40LTEuN2g1YzEuNCAwIDIuNSAxLjEgMi41IDIuNXY1YzAgMS4xLTAuNyAyLTEuNyAyLjR2MC4zYzAgMC40LTAuMSAwLjgtMC40IDEuMS0wLjMgMC40LTAuNyAwLjctMS40IDAuN2gtNS43Yy0xLjYgMC0yLjgtMS4yLTIuOC0yLjh2LTUuN2MwLTAuNiAwLjItMSAwLjUtMS40IDAuNC0wLjMgMC44LTAuNCAxLjMtMC40em0tMC4yIDFoLTAuMnEtMC40IDAtMC41IDAuMmMtMC4yIDAuMS0wLjMgMC4zLTAuMyAwLjZ2NS43YzAgMSAwLjggMS44IDEuOCAxLjhoNS44YzAuMyAwIDAuNC0wLjEgMC42LTAuMyAwLjEtMC4xIDAuMS0wLjMgMC4xLTAuNXYtMC4yaC00LjhjLTEuMyAwLTIuNS0xLjEtMi41LTIuNXptNCAxLjNoMS4zbC0yLjYgMi43Yy0wLjIgMC4xLTAuMiAwLjUgMCAwLjcgMC4yIDAuMiAwLjUgMC4yIDAuNyAwbDIuNi0yLjd2MS4zYzAgMC4zIDAuMyAwLjUgMC41IDAuNSAwLjMgMCAwLjUtMC4yIDAuNS0wLjV2LTIuNWMwLTAuMy0wLjItMC41LTAuNS0wLjVoLTIuNWMtMC4yIDAtMC41IDAuMi0wLjUgMC41IDAgMC4zIDAuMyAwLjUgMC41IDAuNXoiLz4KPC9zdmc+" /></a></td>
 <td>${name}</td>
 <td>${description}</td>
 <td>${start}</td>

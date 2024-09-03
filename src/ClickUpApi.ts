@@ -49,6 +49,32 @@ export class ClickUpApi {
         if (this.token === null || this.team_id === null) {
             throw new Error('Token or Team ID not set');
         }
+
+
+
+        // Create a Date object for the 29th of August 2024
+        let startDate = new Date('2024-08-29T00:00:00Z'); // Start of the day (00:00:00 UTC)
+        let endDate = new Date('2024-08-29T23:59:59Z'); // End of the day (23:59:59 UTC)
+
+        let dateInput = document.getElementById('newDate') as HTMLInputElement;
+        let fetchValue = dateInput.value;
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+        let dateValue = yyyy + '-' + mm + '-' + dd;
+
+        if (dateInput.value) {
+            dateValue = dateInput.value;
+        }
+
+        startDate = new Date(dateValue + "T00:00:00Z");
+        endDate = new Date(dateValue + "T23:59:59Z");
+
+        // Convert the Date object to Unix timestamp (milliseconds since epoch)
+        start_time = startDate.getTime();
+        end_time = endDate.getTime();
+
         const query = new URLSearchParams({
             start_date: start_time.toString(),
             end_date: end_time.toString(),
